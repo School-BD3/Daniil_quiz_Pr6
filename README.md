@@ -125,16 +125,16 @@ Git-тег: `stage-2-inherited`
 ## Скріншоти
 
 ### 1. Головний екран вікторини
-![Головний екран вікторини](docs/screenshots/main-screen.png)
+![Головний екран вікторини](docs/screenshot/main-screen.png)
 
 ### 2. Правильна відповідь
-![Правильна відповідь](docs/screenshots/right-answer.png)
+![Правильна відповідь](docs/screenshot/right-answer.png)
 
 ### 3. Неправильна відповідь
-![Неправильна відповідь](docs/screenshots/wrong-answer.png)
+![Неправильна відповідь](docs/screenshot/wrong-answer.png)
 
 ### 4. Результати вікторини
-![Результати вікторини](docs/screenshots/results.png)
+![Результати вікторини](docs/screenshot/results.png)
 
 
 ## Перевірка
