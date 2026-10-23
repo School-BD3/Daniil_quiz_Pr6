@@ -1,20 +1,14 @@
 import 'package:flutter/material.dart';
 
 import '../models/quiz_questions.dart';
-import '../state/quiz_progress.dart';
+import '../state/quiz_progress_scope.dart';
 
 class ResultsScreen extends StatelessWidget {
-  final QuizProgress progress;
-  final VoidCallback onRestart;
-
-  const ResultsScreen({
-    super.key,
-    required this.progress,
-    required this.onRestart,
-  });
+  const ResultsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final progress = QuizProgressScope.of(context);
     final mistakes = <int>[];
 
     for (var i = 0; i < quizQuestions.length; i++) {
@@ -60,7 +54,10 @@ class ResultsScreen extends StatelessWidget {
           if (mistakes.isEmpty)
             const Card(
               child: ListTile(
-                leading: Icon(Icons.check_circle, color: Colors.green),
+                leading: Icon(
+                  Icons.check_circle,
+                  color: Colors.green,
+                ),
                 title: Text('Усі відповіді правильні!'),
               ),
             )
@@ -83,7 +80,8 @@ class ResultsScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        'Твоя відповідь: ${userAnswer == null ? "не надано" : question.answers[userAnswer]}',
+                        'Твоя відповідь: '
+                        '${userAnswer == null ? "не надано" : question.answers[userAnswer]}',
                         style: const TextStyle(color: Colors.red),
                       ),
                       const SizedBox(height: 4),
@@ -99,7 +97,7 @@ class ResultsScreen extends StatelessWidget {
             }),
           const SizedBox(height: 24),
           FilledButton(
-            onPressed: onRestart,
+            onPressed: progress.restart,
             child: const Text('Пройти ще раз'),
           ),
         ],

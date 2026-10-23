@@ -1,23 +1,12 @@
 import 'package:flutter/material.dart';
 
-import 'results_screen.dart';
 import '../models/quiz_questions.dart';
-import '../state/quiz_progress.dart';
+import '../state/quiz_progress_scope.dart';
 import '../widgets/answer_option.dart';
+import 'results_screen.dart';
 
 class QuizScreen extends StatefulWidget {
-  final QuizProgress progress;
-  final void Function(int answerIndex) onConfirmAnswer;
-  final VoidCallback onNextQuestion;
-  final VoidCallback onRestart;
-
-  const QuizScreen({
-    super.key,
-    required this.progress,
-    required this.onConfirmAnswer,
-    required this.onNextQuestion,
-    required this.onRestart,
-  });
+  const QuizScreen({super.key});
 
   @override
   State<QuizScreen> createState() => _QuizScreenState();
@@ -28,18 +17,20 @@ class _QuizScreenState extends State<QuizScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final progress = widget.progress;
+    final progress = QuizProgressScope.of(context);
 
     if (progress.isFinished) {
-      return ResultsScreen(
-        progress: progress,
-        onRestart: widget.onRestart,
-      );
+      return const ResultsScreen();
     }
 
     final question = quizQuestions[progress.currentQuestionIndex];
     final isConfirmed = progress.isAnswerConfirmed;
     final correctIndex = question.correctAnswerIndex;
+
+    debugPrint(
+      'Перебудова QuizScreen: питання '
+      '${progress.currentQuestionIndex + 1}',
+    );
 
     return Scaffold(
       appBar: AppBar(
@@ -83,6 +74,8 @@ class _QuizScreenState extends State<QuizScreen> {
                     correct: index == correctIndex,
                     showCorrect: isConfirmed,
                     onTap: () {
+                      if (isConfirmed) return;
+
                       setState(() {
                         selectedAnswerIndex = index;
                       });
@@ -112,9 +105,10 @@ class _QuizScreenState extends State<QuizScreen> {
                   ? null
                   : () {
                       if (!isConfirmed) {
-                        widget.onConfirmAnswer(selectedAnswerIndex!);
+                        progress.confirmAnswer(selectedAnswerIndex!);
                       } else {
-                        widget.onNextQuestion();
+                        progress.nextQuestion();
+
                         setState(() {
                           selectedAnswerIndex = null;
                         });
