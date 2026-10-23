@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'results_screen.dart';
 import '../models/quiz_questions.dart';
 import '../state/quiz_progress.dart';
 import '../widgets/answer_option.dart';
@@ -30,36 +31,9 @@ class _QuizScreenState extends State<QuizScreen> {
     final progress = widget.progress;
 
     if (progress.isFinished) {
-      return Scaffold(
-        appBar: AppBar(title: const Text('Результати вікторини')),
-        body: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(24),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Icon(Icons.emoji_events, size: 72),
-                const SizedBox(height: 16),
-                Text(
-                  'Правильних відповідей: '
-                  '${progress.correctAnswersCount} '
-                  'із ${progress.totalQuestions}',
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.headlineSmall,
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  'Результат: ${progress.percentage.toStringAsFixed(0)}%',
-                ),
-                const SizedBox(height: 24),
-                FilledButton(
-                  onPressed: widget.onRestart,
-                  child: const Text('Пройти ще раз'),
-                ),
-              ],
-            ),
-          ),
-        ),
+      return ResultsScreen(
+        progress: progress,
+        onRestart: widget.onRestart,
       );
     }
 
