@@ -122,23 +122,19 @@ Git-тег: `stage-2-inherited`
 
 Повідомлення про перебудову віджетів можна переглянути в консолі налагодження під час запуску застосунку.
 
-Скріншоти
+## Скріншоти
 
-1. Головний екран вікторини
+### 1. Головний екран вікторини
+![Головний екран вікторини](docs/screenshots/main-screen.png)
 
-docs/screenshots/main-screen.png
+### 2. Правильна відповідь
+![Правильна відповідь](docs/screenshots/right-answer.png)
 
-2. Правильна відповідь
+### 3. Неправильна відповідь
+![Неправильна відповідь](docs/screenshots/wrong-answer.png)
 
-docs/screenshots/right-answer.png
-
-3. Неправильна відповідь
-
-docs/screenshots/wrong-answer.png
-
-1. Результати вікторини
-
-docs/screenshots/results.png
+### 4. Результати вікторини
+![Результати вікторини](docs/screenshots/results.png)
 
 
 ## Перевірка
